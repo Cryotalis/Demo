@@ -1,1 +1,1 @@
-<a href="javascript:var userSettings = JSON.parse(localStorage.getItem('user-settings'));delete userSettings.ddid;localStorage.setItem('user-settings', JSON.stringify(userSettings));alert('Daily limit bypassed! Click OK to reload.');location.reload();">Pixlr Bypass</a>
+<a href="javascript:localStorage.setItem('user-settings', localStorage.getItem('user-settings').replace(/(?<=&quot;ddid&quot;:&quot;)(\d+):.+(?=&quot;)/, %27$1:NaN%27));alert(%27Daily limit bypassed. Click OK to reload the page and save the bypass code.%27);location.reload();">Pixlr Bypass</a>
