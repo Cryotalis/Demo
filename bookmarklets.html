@@ -1,0 +1,81 @@
+<head>
+  <title>Hywell's Bookmarklets</title>
+  <style>
+    body {
+      background-color: #313338;
+      color: whitesmoke;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    
+    mark {
+      background-color:transparent;
+    }
+
+    mark > a {
+      color:#ffa327;
+      font-weight: bold;
+    }
+
+    a {
+      color: #009ff6;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>Hywell's Bookmarklets</h1>
+  <p>
+    Drag and drop the links onto your bookmarks bar to use. Bookmarklets are highlighted in <mark><a>Orange</a></mark>.
+    <br><br>
+    Bookmarklets are bookmarks that execute JavaScript code instead of sending you to a webpage when you click on them.
+  </p>
+  <h3>Granblue Fantasy</h3>
+  <ul>
+    <li>
+      <p>
+        Check out <a href="https://gbf.wiki/User:Midokuni/Notepad/Bookmarklets">Midokuni's Bookmarklets</a>
+      </p>
+    </li>
+    <li>
+      <p>
+        Copy spark command for Europa Bot: <mark><a href="javascript:var elements = $(&#39;div[class=&quot;prt-gacha-obtain ticket legend&quot;]&#39;);var info = elements[0]?.innerHTML + elements[1]?.innerHTML;var tenParts = info.match(/(?&lt;=Tickets held: )\d+(?=.+data-index=&quot;1&quot;)/s) ?? 0;var tickets = info.match(/(?&lt;=Tickets held: )\d+(?!.+data-index=&quot;1&quot;)/s) ?? 0;var crystals = $(&#39;.prt-stone&#39;)[0].innerText;navigator.clipboard.writeText(`/spark set sh: ${crystals} ${tickets} ${tenParts}`);alert(&#39;Spark command copied!&#39;);">Copy my /spark</a></mark>
+      </p>
+      <ul>
+        <li>
+          <p>
+            Only works from the <a href="https://game.granbluefantasy.jp/#gacha">Draw Page</a>
+          </p>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>
+        View your spark progress: <mark><a href="javascript:var elements = $(&#39;div[class=&quot;prt-gacha-obtain ticket legend&quot;]&#39;);var info = elements[0]?.innerHTML + elements[1]?.innerHTML;var tenParts = info.match(/(?&lt;=Tickets held: )\d+(?=.+data-index=&quot;1&quot;)/s) ?? 0;var tickets = info.match(/(?&lt;=Tickets held: )\d+(?!.+data-index=&quot;1&quot;)/s) ?? 0;var crystals = $(&#39;.prt-stone&#39;)[0].innerText;var rolls = +tenParts * 10 + +tickets + +crystals / 300;alert(&quot;You currently have -- &quot; + Math.floor(rolls) + &quot; -- rolls saved up.\nThis is &quot; + ((rolls/3).toLocaleString(void 0,{maximumFractionDigits:2})+&quot;%&quot;) + &quot; of a spark!\n\nResource Breakdown:\n&gt; 10-Draw Tickets: &quot; + tenParts + &quot;\n&gt; Draw Tickets: &quot; + tickets + &quot;\n&gt; Crystals: &quot; + crystals);">Spark Tracker</a></mark>
+      </p>
+      <ul>
+        <li>
+          <p>
+            Only works from the <a href="https://game.granbluefantasy.jp/#gacha">Draw Page</a>
+          </p>
+        </li>
+        <li>
+          <p>
+            This bookmarklet is derived from <a href="https://gbf.wiki/User:Midokuni/Notepad/Bookmarklets#Spark_Counter">Midokuni's Spark Tracker bookmarklet</a>.
+          </p>
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <h3>Pixlr</h3>
+  <ul>
+    <li>
+      <p>
+        Bypass Pixlr's 3 daily saves limit: <mark><a href="javascript:var time = new Date();var key = (Date.UTC(time.getFullYear(), time.getMonth(), time.getDate()) - Date.UTC(time.getFullYear(), 0, 0)) / 24 / 60 / 60 / 1e3;var userSettings = localStorage.getItem(&#39;user-settings&#39;);userSettings = userSettings.replace(/(,&quot;ddid.+)?}/, `,&quot;ddid&quot;:&quot;${key}:NaN&quot;}`);localStorage.setItem(&#39;user-settings&#39;, userSettings);alert(&#39;Daily limit bypassed. Click OK to reload the page and save the bypass code.&#39;);location.reload();">Pixlr Bypass</a></mark>
+      </p>
+    </li>
+  </ul>
+</body>
