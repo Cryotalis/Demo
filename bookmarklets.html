@@ -73,6 +73,14 @@
       <p>Copy raid code with Discord Timestamp: <mark><a href="javascript:navigator.clipboard.writeText(`\`${stage.pJsnData.twitter.battle_id}\` ends <t:${parseInt(new Date().getTime() / 1000) + stage.pJsnData.timer}:R>`); alert('Battle Code Copied!');">Copy raid code</a></mark></p>
     </li>
     <li>
+      <p>Copy raid code (Detailed): <mark><a href="javascript: var bossData = stage.gGameStatus.boss.param[0]; var raidData = stage.pJsnData; navigator.clipboard.writeText(`\`\`\`${raidData.twitter.battle_id}\`\`\`\nEnds <t:${parseInt(new Date().getTime() / 1000) + raidData.timer}:R>   |   Boss HP: ${parseInt(bossData.hp).toLocaleString()} [${(bossData.hp / bossData.hpmax).toLocaleString('en', {style: 'percent'})}]   |   Participants: ${raidData.fellow}/${raidData.limit_number}`); alert('Battle Data Copied!');">Copy raid data</a></mark></p>
+      <ul>
+        <li>
+          <p>Includes raid code, raid time limit, boss hp, and limit for number of participants.</p>
+        </li>
+      </ul>
+    </li>
+    <li>
       <p><mark><a href="javascript: navigator.clipboard.writeText(stage.pJsnData.twitter.battle_id); alert('Raid Code Copied!');">Copy raid code</a></mark></p>
       <ul>
         <li>
