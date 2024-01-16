@@ -77,7 +77,7 @@
   <h4>Raid Bookmarklets</h4>
   <ul>
     <li>
-      <p>Copy raid code (Detailed): <mark><a href="javascript: var bossData = stage.gGameStatus.boss.param[0]; var raidData = stage.pJsnData; navigator.clipboard.writeText(`\`\`\`${raidData.twitter.battle_id}\`\`\`\nEnds <t:${parseInt(new Date().getTime() / 1000) + raidData.timer}:R>   |   Boss HP: ${parseInt(bossData.hp).toLocaleString()} [${(bossData.hp / bossData.hpmax).toLocaleString('en', {style: 'percent'})}]   |   Participants: ${raidData.fellow}/${raidData.limit_number}`); alert('Battle Data Copied!');">Copy raid data</a></mark></p>
+      <p>Copy raid code (Detailed): <mark><a href="javascript: var bossData = stage.gGameStatus.boss.param[0]; var raidData = stage.pJsnData; navigator.clipboard.writeText(`\`\`\`${raidData.twitter.battle_id}\`\`\`\nEnds <t:${parseInt(new Date().getTime() / 1000) + raidData.timer}:R>   |   Boss HP: ${parseInt(bossData.hp).toLocaleString()} [${(bossData.hp / bossData.hpmax).toLocaleString('en', {style: 'percent'})}]   |   Participants: ${raidData.fellow}/${raidData.limit_number}`); alert(`Battle Data Copied!\nRaid Code: ${raidData.twitter.battle_id}\nBoss HP: ${parseInt(bossData.hp).toLocaleString()} [${(bossData.hp / bossData.hpmax).toLocaleString('en', {style: 'percent'})}]`);">Copy raid data</a></mark></p>
       <ul>
         <li>
           <p>Includes raid code, raid time remaining (Discord Timestamp), boss hp, and limit for number of participants.</p>
