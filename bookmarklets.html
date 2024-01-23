@@ -78,7 +78,7 @@
   <h4>Raid Bookmarklets</h4>
   <ul>
     <li>
-      <p>Copy raid code command for Europa Bot: <mark><a href="javascript: var bossData = stage.gGameStatus.boss.param[0]; var raidData = stage.pJsnData; navigator.clipboard.writeText(`/raidcode code: ${raidData.twitter.battle_id} name: ${raidData.twitter.monster} time: ${Math.floor(raidData.timer / 60)} hp-percent: ${Math.ceil((bossData.hp / bossData.hpmax) * 100)} hp: ${bossData.hp} participants: ${raidData.fellow}/${raidData.limit_number} quest-id: ${raidData.quest_id}`);">Copy Raid Command</a></mark></p>
+      <p>Copy raid code command for Europa Bot: <mark><a href="javascript: var bossData = stage.gGameStatus.boss.param[0]; var raidData = stage.pJsnData; navigator.clipboard.writeText(`/raidcode code: ${raidData.twitter.battle_id} name: ${raidData.twitter.monster} time: ${Math.floor(raidData.timer / 60)} hp-percent: ${Math.ceil((bossData.hp / bossData.hpmax) * 100)} hp: ${bossData.hp} participants: ${raidData.fellow}/${raidData.limit_number} quest-id: ${raidData.quest_id}`); alert(`Raid Code Command copied!\nRaid Code: ${raidData.twitter.battle_id}\nBoss HP: ${parseInt(bossData.hp).toLocaleString()} [${(bossData.hp / bossData.hpmax).toLocaleString('en', {style: 'percent'})}]`);">Copy Raid Command</a></mark></p>
       <ul>
         <li>
           <p>Copies a filled out <strong>/raidcode</strong> command for use with Europa Bot, which displays the following:</p>
@@ -114,13 +114,13 @@
       </ul>
     </li>
     <li>
-      <p>Copy raid code with Discord Timestamp: <mark><a href="javascript:navigator.clipboard.writeText(`\`${stage.pJsnData.twitter.battle_id}\` ends <t:${parseInt(new Date().getTime() / 1000) + stage.pJsnData.timer}:R>`); alert('Battle Code Copied!');">Copy raid code</a></mark></p>
+      <p>Copy raid code (with Discord Timestamp): <mark><a href="javascript:navigator.clipboard.writeText(`\`${stage.pJsnData.twitter.battle_id}\` ends <t:${parseInt(new Date().getTime() / 1000) + stage.pJsnData.timer}:R>`); alert('Battle Code Copied!');">Copy raid code</a></mark></p>
     </li>
     <li>
-      <p>Copy raid code (Code Block Formatted): <mark><a href="javascript: navigator.clipboard.writeText('```' + stage.pJsnData.twitter.battle_id + '```'); alert('Raid Code Copied!');">Copy raid code</a></mark></p>
+      <p>Copy raid code (Discord Code Block Formatted): <mark><a href="javascript: navigator.clipboard.writeText('```' + stage.pJsnData.twitter.battle_id + '```'); alert('Raid Code Copied!');">Copy raid code</a></mark></p>
     </li>
     <li>
-      <p>Copy raid code (Plaintext): <mark><a href="javascript: navigator.clipboard.writeText(stage.pJsnData.twitter.battle_id); alert('Raid Code Copied!');">Copy raid code</a></mark></p>
+      <p>Copy raid code (Code Only): <mark><a href="javascript: navigator.clipboard.writeText(stage.pJsnData.twitter.battle_id); alert('Raid Code Copied!');">Copy raid code</a></mark></p>
     </li>
   </ul>
   <br>
