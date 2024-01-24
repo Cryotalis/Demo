@@ -1,135 +1,273 @@
+<!doctype html>
+<html lang="en-us" class="has-background-dark">
+
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hywell's Bookmarklets</title>
   <link rel="icon" type="image/x-icon" href="bookmark.ico">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script>
+    $(() => {
+      let bookmarklets = $('.bookmarklet').filter((i, e) => e.getAttribute('href'))
+      let originalHrefs = [...bookmarklets.map((i, e) => e.getAttribute('href'))]
+      
+      $('#alertCheckbox').click(event => {
+        if (event.target.checked) {
+          bookmarklets.each((i, bookmarklet) => bookmarklet.setAttribute('href', originalHrefs[i]))
+        } else {
+          bookmarklets.each((i, bookmarklet) => {
+            bookmarklet.setAttribute('href', bookmarklet.getAttribute('href').replace(/alert.+/, ''))
+          })
+        }
+      })
+
+      $('[id^=menu]').click(({currentTarget}) => {
+        $('[id^=menu]').each((i, element) => {
+          element.setAttribute('class', element === currentTarget ? 'is-active' : 'in-active')
+          $(`#content-${i + 1}`).css('display', element === currentTarget ? 'contents' : 'none')
+        })
+      })
+
+      $('.bookmarklet').click(() => {
+        $('#instruction-modal').get(0).classList.add('is-active')
+      })
+
+      $('.delete').click((event) => {
+        $('#' + event.target.getAttribute('data-target')).get(0).classList.remove('is-active')
+      })
+    })
+  </script>
   <style>
-    body {
-      background-color: #313338;
-      color: whitesmoke;
-      font-family: Arial, Helvetica, sans-serif;
-    }
-    
-    mark {
-      background-color:transparent;
+    table, th, tr, td {
+      border: none !important;
     }
 
-    mark > a {
-      color:#ffa327;
+    td {
+      vertical-align: middle !important;
+    }
+
+    th {
+      background-color: orange;
+    }
+
+    tr, strong, .checkbox {
+      color: lightgray !important;
+    }
+
+    tr:nth-child(even) {
+      background-color: rgb(40, 40, 40) !important;
+    }
+
+    tr:nth-child(odd) {
+      background-color: rgb(44, 44, 46) !important;
+    }
+
+    a, a:hover {
+      color: #009ff6;
+    }
+
+    a:hover:not(.nav) {
+      text-decoration: underline !important;
+    }
+
+    ul {
+      margin-top: 0.3em !important;
+    }
+
+    .bookmarklet {
+      background-color: transparent;
+      color: orange !important;
       font-weight: bold;
     }
 
-    a {
-      color: #009ff6;
-      text-decoration: none;
+    .nav > img {
+      padding-right: 8px;
+      max-width: 40px;
     }
 
-    a:hover {
-      text-decoration: underline;
+    .in-active > a > img {
+      filter: grayscale(70%);
+    }
+
+    [id^='menu'] {
+      width: 0;
+    }
+
+    .message-body {
+      background-color: #525252;
     }
   </style>
 </head>
+
 <body>
-  <h1>Hywell's Bookmarklets</h1>
-  <p>
-    Drag and drop the bookmarklets onto your bookmarks bar to use. Bookmarklets on this page are highlighted in <mark><a>Orange</a></mark>.
-    <br><br>
-    Bookmarklets are bookmarks that execute JavaScript code instead of sending you to a webpage when you click on them.
-  </p>
-  <hr color="#313538">
-  <h2>Granblue Fantasy</h2>
-  <ul>
-    <li>
-      <p>
-        Check out <a href="https://gbf.wiki/User:Midokuni/Notepad/Bookmarklets" target="_blank" rel="noopener noreferrer">Midokuni's Bookmarklets for more.</a>
-      </p>
-    </li>
-  </ul>
-  <h4>Spark Bookmarklets</h4>
-  <ul>
-    <li>
-      <p>
-        Copy spark command for Europa Bot: <mark><a href="javascript:var elements = $(&#39;div[class=&quot;prt-gacha-obtain ticket legend&quot;]&#39;);var info = elements[0]?.innerHTML + elements[1]?.innerHTML;var tenParts = info.match(/(?&lt;=Tickets held: )\d+(?=.+data-index=&quot;1&quot;)/s) ?? 0;var tickets = info.match(/(?&lt;=Tickets held: )\d+(?!.+data-index=&quot;1&quot;)/s) ?? 0;var crystals = $(&#39;.prt-stone&#39;)[0].innerText;navigator.clipboard.writeText(`/spark set sh: ${crystals} ${tickets} ${tenParts}`);alert(&#39;Spark command copied!&#39;);">Copy my /spark</a></mark>
-      </p>
+  <div class="container" style="margin-top: 1em;">
+    <h1 class="title is-2 has-text-light">Hywell's Bookmarklets</h1>
+
+    <article class="message is-info">
+      <div class="message-body has-text-light">
+        Drag and drop the bookmarklets onto your bookmarks bar to use. Bookmarklets on this page are highlighted in <a class="bookmarklet" style="text-decoration: none;">Orange</a>.
+        <p style="height: 10px;"></p>
+        Bookmarklets are bookmarks that execute JavaScript code instead of sending you to a webpage when you click on them.
+      </div>
+    </article>
+
+    <label class="checkbox" style="font-size: large;">
+      <input id="alertCheckbox" type="checkbox" checked>
+      Include alert box
+    </label>
+
+    <div class="tabs is-toggle is-fullwidth is-medium" style="margin-bottom: 0.5rem;">
       <ul>
-        <li>
-          <p>
-            Only works from the <a href="https://game.granbluefantasy.jp/#gacha" target="_blank" rel="noopener noreferrer">Draw Page</a>
-          </p>
-        </li>
+        <li id="menu-1" class="is-active"><a class="nav"><img src="https://prd-game-a-granbluefantasy.akamaized.net/favicon.ico">Granblue Fantasy</a></li>
+        <li id="menu-2" class="in-active"><a class="nav"><img src="https://pixlr.com/favicon.ico">Pixlr</a></li>
       </ul>
-    </li>
-    <li>
-      <p>
-        View your spark progress: <mark><a href="javascript:var elements = $(&#39;div[class=&quot;prt-gacha-obtain ticket legend&quot;]&#39;);var info = elements[0]?.innerHTML + elements[1]?.innerHTML;var tenParts = info.match(/(?&lt;=Tickets held: )\d+(?=.+data-index=&quot;1&quot;)/s) ?? 0;var tickets = info.match(/(?&lt;=Tickets held: )\d+(?!.+data-index=&quot;1&quot;)/s) ?? 0;var crystals = $(&#39;.prt-stone&#39;)[0].innerText;var rolls = +tenParts * 10 + +tickets + +crystals / 300;alert(&quot;You currently have -- &quot; + Math.floor(rolls) + &quot; -- rolls saved up.\nThis is &quot; + ((rolls/3).toLocaleString(void 0,{maximumFractionDigits:2})+&quot;%&quot;) + &quot; of a spark!\n\nResource Breakdown:\n&gt; 10-Draw Tickets: &quot; + tenParts + &quot;\n&gt; Draw Tickets: &quot; + tickets + &quot;\n&gt; Crystals: &quot; + crystals);">Spark Tracker</a></mark>
+    </div>
+
+    <table class="table is-fullwidth">
+      <thead>
+        <tr>
+          <th style="width:30%">Bookmarklet</th>
+          <th style="width:70%">Description</th>
+        </tr>
+      </thead>
+
+      <tbody id="content-1" class="content" style="display: contents;">
+        <tr>
+          <td><a class="bookmarklet" href="javascript:var elements = $(&#39;div[class=&quot;prt-gacha-obtain ticket legend&quot;]&#39;);var info = elements[0]?.innerHTML + elements[1]?.innerHTML;var tenParts = info.match(/(?&lt;=Tickets held: )\d+(?=.+data-index=&quot;1&quot;)/s) ?? 0;var tickets = info.match(/(?&lt;=Tickets held: )\d+(?!.+data-index=&quot;1&quot;)/s) ?? 0;var crystals = $(&#39;.prt-stone&#39;)[0].innerText;navigator.clipboard.writeText(`/spark set sh: ${crystals} ${tickets} ${tenParts}`);alert(&#39;Spark command copied!&#39;);">Copy my /spark</a></td>
+          <td>
+            <ul>
+              <li>Copies a filled out <strong>/spark set</strong> command for Europa bot</li>
+              <li>
+                Only works from the <a href="https://game.granbluefantasy.jp/#gacha" target="_blank" rel="noopener noreferrer">Draw Page</a>
+              </li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td><a class="bookmarklet" href="javascript:var elements = $(&#39;div[class=&quot;prt-gacha-obtain ticket legend&quot;]&#39;);var info = elements[0]?.innerHTML + elements[1]?.innerHTML;var tenParts = info.match(/(?&lt;=Tickets held: )\d+(?=.+data-index=&quot;1&quot;)/s) ?? 0;var tickets = info.match(/(?&lt;=Tickets held: )\d+(?!.+data-index=&quot;1&quot;)/s) ?? 0;var crystals = $(&#39;.prt-stone&#39;)[0].innerText;var rolls = +tenParts * 10 + +tickets + +crystals / 300;alert(&quot;You currently have -- &quot; + Math.floor(rolls) + &quot; -- rolls saved up.\nThis is &quot; + ((rolls/3).toLocaleString(void 0,{maximumFractionDigits:2})+&quot;%&quot;) + &quot; of a spark!\n\nResource Breakdown:\n&gt; 10-Draw Tickets: &quot; + tenParts + &quot;\n&gt; Draw Tickets: &quot; + tickets + &quot;\n&gt; Crystals: &quot; + crystals);">Spark Tracker</a></td>
+          <td>
+            <ul>
+              <li>Shows you your spark progress in a pop-up box</li>
+              <li>
+                Only works from the <a href="https://game.granbluefantasy.jp/#gacha" target="_blank" rel="noopener noreferrer">Draw Page</a>
+              </li>
+              <li>
+                This bookmarklet is derived from <a href="https://gbf.wiki/User:Midokuni/Notepad/Bookmarklets#Spark_Counter" target="_blank" rel="noopener noreferrer">Midokuni's Spark Tracker bookmarklet</a>.
+              </li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td><a class="bookmarklet" href="javascript: var bossData = stage.gGameStatus.boss.param[0]; var raidData = stage.pJsnData; navigator.clipboard.writeText(`/raidcode code: ${raidData.twitter.battle_id} name: ${raidData.twitter.monster} time: ${Math.floor(raidData.timer / 60)} hp-percent: ${Math.ceil((bossData.hp / bossData.hpmax) * 100)} hp: ${bossData.hp} participants: ${raidData.fellow}/${raidData.limit_number} quest-id: ${raidData.quest_id}`); alert(`Raid Code Command copied!\nRaid Code: ${raidData.twitter.battle_id}\nBoss HP: ${parseInt(bossData.hp).toLocaleString()} [${(bossData.hp / bossData.hpmax).toLocaleString('en', {style: 'percent'})}]`);">Copy my /raidcode</a></td>
+          <td>
+            <ul>
+              <li>
+                Copies a filled out <strong>/raidcode</strong> command for Europa Bot, which displays the following in an embedded message:
+                <ul>
+                  <li>Raid Code</li>
+                  <li>Boss Name, HP, and Image</li>
+                  <li>Time remaining in the raid</li>
+                  <li>Number of participants in the raid</li>
+                </ul>
+              </li>
+              <li>The resulting embedded message is both mobile and desktop friendly</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td><a class="bookmarklet" href="javascript: var bossData = stage.gGameStatus.boss.param[0]; var raidData = stage.pJsnData; navigator.clipboard.writeText(`\`\`\`${raidData.twitter.battle_id}\`\`\`\nEnds <t:${parseInt(new Date().getTime() / 1000) + raidData.timer}:R>   |   Boss HP: ${parseInt(bossData.hp).toLocaleString()} [${(bossData.hp / bossData.hpmax).toLocaleString('en', {style: 'percent'})}]   |   Participants: ${raidData.fellow}/${raidData.limit_number}`); alert(`Battle Data Copied!\nRaid Code: ${raidData.twitter.battle_id}\nBoss HP: ${parseInt(bossData.hp).toLocaleString()} [${(bossData.hp / bossData.hpmax).toLocaleString('en', {style: 'percent'})}]`);">Copy raid data</a></td>
+          <td>
+            <ul>
+              <li>Copies a message that includes the following:</li>
+              <ul>
+                <li>The raid code inside of a Discord code block</li>
+                <li>The time remaining in the raid as a Discord timestamp</li>
+                <li>Boss HP, HP percentage, and number of participants for the raid</li>
+              </ul>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td><a class="bookmarklet" href="javascript:navigator.clipboard.writeText(`\`${stage.pJsnData.twitter.battle_id}\` ends <t:${parseInt(new Date().getTime() / 1000) + stage.pJsnData.timer}:R>`); alert('Battle Code Copied!');">Copy raid code</a></td>
+          <td>
+            <ul>
+              <li>Copies a message containing the raid code followed by a Discord timestamp indicating when the raid will end</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td><a class="bookmarklet" href="javascript: navigator.clipboard.writeText('```' + stage.pJsnData.twitter.battle_id + '```'); alert('Raid Code Copied!');">Copy raid code</a></td>
+          <td>
+            <ul>
+              <li>Copies a message with the raid code inside of a Discord code block</li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
+          <td><a class="bookmarklet" href="javascript: navigator.clipboard.writeText(stage.pJsnData.twitter.battle_id); alert('Raid Code Copied!');">Copy raid code</a></td>
+          <td>
+            <ul>
+              <li>Copies a message containing only the raid code</li>
+            </ul>
+          </td>
+        </tr>
+        <!-- <tr>
+          <td></td>
+          <td>
+            <ul>
+              <li></li>
+              <li></li>
+            </ul>
+          </td>
+        </tr> -->
+      </tbody>
+
+      <tbody id="content-2" class="content" style="display: none;">
+        <tr>
+          <td><a class="bookmarklet" href="javascript:var time = new Date();var key = (Date.UTC(time.getFullYear(), time.getMonth(), time.getDate()) - Date.UTC(time.getFullYear(), 0, 0)) / 24 / 60 / 60 / 1e3;var userSettings = localStorage.getItem(&#39;user-settings&#39;);userSettings = userSettings.replace(/(,&quot;ddid.+)?}/, `,&quot;ddid&quot;:&quot;${key}:NaN&quot;}`);localStorage.setItem(&#39;user-settings&#39;, userSettings);alert(&#39;Daily limit bypassed. Click OK to reload the page and save the bypass code.&#39;);location.reload();">Pixlr Editor Bypass</a></td>
+          <td>
+            <ul>
+              <li>Bypasses Pixlr Editor's 3 daily saves limit</li>
+              <li>This bypass only needs to activated once a day</li>
+            </ul>
+          </td>
+        </tr>
+        <!-- <tr>
+          <td></td>
+          <td>
+            <ul>
+              <li></li>
+              <li></li>
+            </ul>
+          </td>
+        </tr> -->
+      </tbody>
+    </table>
+  </div>
+  
+  <div id="instruction-modal" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+      <article class="message is-info">
+        <div class="message-header">
+          <p>Info</p>
+          <button class="delete" aria-label="delete" data-target="instruction-modal"></button>
+        </div>
+        <div class="message-body has-text-light">
+          Drag and drop the bookmarklet onto your bookmarks bar to use.
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <footer class="footer has-background-dark">
+    <div class="content has-text-centered has-text-white">
+      <p id="contact">
+        Got a concern, suggestion, or request? Join my <a class="test" target="_blank" href="https://discordapp.com/invite/YtwzVSp">server</a>.
       </p>
-      <ul>
-        <li>
-          <p>
-            Only works from the <a href="https://game.granbluefantasy.jp/#gacha" target="_blank" rel="noopener noreferrer">Draw Page</a>
-          </p>
-        </li>
-        <li>
-          <p>
-            This bookmarklet is derived from <a href="https://gbf.wiki/User:Midokuni/Notepad/Bookmarklets#Spark_Counter" target="_blank" rel="noopener noreferrer">Midokuni's Spark Tracker bookmarklet</a>.
-          </p>
-        </li>
-      </ul>
-    </li>
-  </ul>
-  <h4>Raid Bookmarklets</h4>
-  <ul>
-    <li>
-      <p>Copy raid code command for Europa Bot: <mark><a href="javascript: var bossData = stage.gGameStatus.boss.param[0]; var raidData = stage.pJsnData; navigator.clipboard.writeText(`/raidcode code: ${raidData.twitter.battle_id} name: ${raidData.twitter.monster} time: ${Math.floor(raidData.timer / 60)} hp-percent: ${Math.ceil((bossData.hp / bossData.hpmax) * 100)} hp: ${bossData.hp} participants: ${raidData.fellow}/${raidData.limit_number} quest-id: ${raidData.quest_id}`); alert(`Raid Code Command copied!\nRaid Code: ${raidData.twitter.battle_id}\nBoss HP: ${parseInt(bossData.hp).toLocaleString()} [${(bossData.hp / bossData.hpmax).toLocaleString('en', {style: 'percent'})}]`);">Copy Raid Command</a></mark></p>
-      <ul>
-        <li>
-          <p>Copies a filled out <strong>/raidcode</strong> command for use with Europa Bot, which displays the following:</p>
-          <ul>
-            <li>
-              <p>Raid Code</p>
-            </li>
-            <li>
-              <p>Boss Name, HP, and Image</p>
-            </li>
-            <li>
-              <p>Time remaining in the raid</p>
-            </li>
-            <li>
-              <p>Number of participants in the raid</p>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <p>The resulting message is both mobile and desktop friendly</p>
-        </li>
-      </ul>
-    </li>
-    <li>
-      <p>Copy raid code (Detailed): <mark><a href="javascript: var bossData = stage.gGameStatus.boss.param[0]; var raidData = stage.pJsnData; navigator.clipboard.writeText(`\`\`\`${raidData.twitter.battle_id}\`\`\`\nEnds <t:${parseInt(new Date().getTime() / 1000) + raidData.timer}:R>   |   Boss HP: ${parseInt(bossData.hp).toLocaleString()} [${(bossData.hp / bossData.hpmax).toLocaleString('en', {style: 'percent'})}]   |   Participants: ${raidData.fellow}/${raidData.limit_number}`); alert(`Battle Data Copied!\nRaid Code: ${raidData.twitter.battle_id}\nBoss HP: ${parseInt(bossData.hp).toLocaleString()} [${(bossData.hp / bossData.hpmax).toLocaleString('en', {style: 'percent'})}]`);">Copy raid data</a></mark></p>
-      <ul>
-        <li>
-          <p>Includes raid code, raid time remaining (Discord Timestamp), boss hp, and limit for number of participants.</p>
-        </li>
-        <li>
-          <p>The pop up alert box will also display the raid code and HP remaining on the boss.</p>
-        </li>
-      </ul>
-    </li>
-    <li>
-      <p>Copy raid code (with Discord Timestamp): <mark><a href="javascript:navigator.clipboard.writeText(`\`${stage.pJsnData.twitter.battle_id}\` ends <t:${parseInt(new Date().getTime() / 1000) + stage.pJsnData.timer}:R>`); alert('Battle Code Copied!');">Copy raid code</a></mark></p>
-    </li>
-    <li>
-      <p>Copy raid code (Discord Code Block Formatted): <mark><a href="javascript: navigator.clipboard.writeText('```' + stage.pJsnData.twitter.battle_id + '```'); alert('Raid Code Copied!');">Copy raid code</a></mark></p>
-    </li>
-    <li>
-      <p>Copy raid code (Code Only): <mark><a href="javascript: navigator.clipboard.writeText(stage.pJsnData.twitter.battle_id); alert('Raid Code Copied!');">Copy raid code</a></mark></p>
-    </li>
-  </ul>
-  <br>
-  <h2>Pixlr</h2>
-  <ul>
-    <li>
-      <p>
-        Bypass Pixlr Editor's 3 daily saves limit: <mark><a href="javascript:var time = new Date();var key = (Date.UTC(time.getFullYear(), time.getMonth(), time.getDate()) - Date.UTC(time.getFullYear(), 0, 0)) / 24 / 60 / 60 / 1e3;var userSettings = localStorage.getItem(&#39;user-settings&#39;);userSettings = userSettings.replace(/(,&quot;ddid.+)?}/, `,&quot;ddid&quot;:&quot;${key}:NaN&quot;}`);localStorage.setItem(&#39;user-settings&#39;, userSettings);alert(&#39;Daily limit bypassed. Click OK to reload the page and save the bypass code.&#39;);location.reload();">Pixlr Editor Bypass</a></mark>
-      </p>
-    </li>
-  </ul>
+    </div>
+  </footer>
 </body>
+</html>
