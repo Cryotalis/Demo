@@ -146,20 +146,6 @@
           </td>
         </tr>
         <tr>
-          <td><a class="bookmarklet" href="javascript:var elements = $(&#39;div[class=&quot;prt-gacha-obtain ticket legend&quot;]&#39;);var info = elements[0]?.innerHTML + elements[1]?.innerHTML;var tenParts = info.match(/(?&lt;=Tickets held: )\d+(?=.+data-index=&quot;1&quot;)/s) ?? 0;var tickets = info.match(/(?&lt;=Tickets held: )\d+(?!.+data-index=&quot;1&quot;)/s) ?? 0;var crystals = $(&#39;.prt-stone&#39;)[0].innerText;var rolls = +tenParts * 10 + +tickets + +crystals / 300;alert(&quot;You currently have -- &quot; + Math.floor(rolls) + &quot; -- rolls saved up.\nThis is &quot; + ((rolls/3).toLocaleString(void 0,{maximumFractionDigits:2})+&quot;%&quot;) + &quot; of a spark!\n\nResource Breakdown:\n&gt; 10-Draw Tickets: &quot; + tenParts + &quot;\n&gt; Draw Tickets: &quot; + tickets + &quot;\n&gt; Crystals: &quot; + crystals);">Spark Tracker</a></td>
-          <td>
-            <ul>
-              <li>Shows you your spark progress in a pop-up box</li>
-              <li>
-                Only works from the <a href="https://game.granbluefantasy.jp/#gacha" target="_blank" rel="noopener noreferrer">Draw Page</a>
-              </li>
-              <li>
-                This bookmarklet is derived from <a href="https://gbf.wiki/User:Midokuni/Notepad/Bookmarklets#Spark_Counter" target="_blank" rel="noopener noreferrer">Midokuni's Spark Tracker bookmarklet</a>.
-              </li>
-            </ul>
-          </td>
-        </tr>
-        <tr>
           <td><a class="bookmarklet" href="javascript: var bossData = stage.gGameStatus.boss.param[0]; var raidData = stage.pJsnData; navigator.clipboard.writeText(`/raidcode code: ${raidData.twitter.battle_id} name: ${raidData.twitter.monster} time: ${Math.floor(raidData.timer / 60)} hp-percent: ${Math.ceil((bossData.hp / bossData.hpmax) * 100)} hp: ${bossData.hp} participants: ${raidData.fellow}/${raidData.limit_number} quest-id: ${raidData.quest_id}`); alert(`Raid Code Command copied!\nRaid Code: ${raidData.twitter.battle_id}\nBoss HP: ${parseInt(bossData.hp).toLocaleString()} [${(bossData.hp / bossData.hpmax).toLocaleString('en', {style: 'percent'})}]`);">Copy my /raidcode</a></td>
           <td>
             <ul>
