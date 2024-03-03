@@ -146,6 +146,20 @@
           </td>
         </tr>
         <tr>
+          <td><a class="bookmarklet" href="javascript:var info = Game.view.gachaModel.attributes;var allTickets = info.legend.lineup[1].legend_gacha_ticket_list;var tenParts = info.legend.lineup[0].legend_gacha_ticket_list[0].ticket_num;var crystals = parseInt(info.stone_num);var singles = allTickets.map(t => t.ticket_num).reduce((a, b) => a + b);var expire = new Date(new Date().setUTCHours(new Date().getUTCHours() > 19 ? 43 : 19, 59)).toLocaleDateString('en-US', {month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', timeZoneName: 'short'});var freeRolls = info.enable_term_free_legend_10 ? 10 : info.enable_term_free_legend ? 1 : 0;var rolls = (tenParts * 10) + singles + (crystals / 300) + freeRolls;var message = `You currently have -- ${Math.floor(rolls)} -- rolls.\nThat's ${(rolls/3).toFixed(2)}% of a spark!\n\n-- Resource Breakdown --`;if (freeRolls) message += `\n> Free Daily Pulls: ${freeRolls} (Expires: ${expire})`;message += `\n> 10 Part Draws: ${tenParts}`;allTickets.forEach(t => message += `\n>${t.ticket_name}: ${t.ticket_num} ${t.ticket_end_at ? `(Expires: ${t.ticket_end_at})` : ''}`);message += `\n> Crystals: ${crystals.toLocaleString()} (${Math.floor(crystals/300)} Draws)`;alert(message);">Spark Tracker</a></td>
+          <td>
+            <ul>
+              <li>Shows you your spark progress in a pop-up box</li>
+              <li>
+                Only works from the <a href="https://game.granbluefantasy.jp/#gacha" target="_blank" rel="noopener noreferrer">Draw Page</a>
+              </li>
+              <li>
+                The formatting used for the alert box is taken from <a href="https://gbf.wiki/User:Midokuni/Notepad/Bookmarklets#Spark_Counter" target="_blank" rel="noopener noreferrer">Midokuni's Spark Tracker bookmarklet</a>, but the underlying code is entirely different.
+              </li>
+            </ul>
+          </td>
+        </tr>
+        <tr>
           <td><a class="bookmarklet" href="javascript: var bossData = stage.gGameStatus.boss.param[0]; var raidData = stage.pJsnData; navigator.clipboard.writeText(`/raidcode code: ${raidData.twitter.battle_id} name: ${raidData.twitter.monster} time: ${Math.floor(raidData.timer / 60)} hp-percent: ${Math.ceil((bossData.hp / bossData.hpmax) * 100)} hp: ${bossData.hp} participants: ${raidData.fellow}/${raidData.limit_number} quest-id: ${raidData.quest_id}`); alert(`Raid Code Command copied!\nRaid Code: ${raidData.twitter.battle_id}\nBoss HP: ${parseInt(bossData.hp).toLocaleString()} [${(bossData.hp / bossData.hpmax).toLocaleString('en', {style: 'percent'})}]`);">Copy my /raidcode</a></td>
           <td>
             <ul>
