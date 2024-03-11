@@ -104,6 +104,7 @@
 <body>
   <div class="container" style="margin-top: 1em;">
     <h1 class="title is-2 has-text-light">Hywell's Bookmarklets</h1>
+    <h5 class="title is-5 has-text-light">Last Updated: March 10th, 2024</h5>
 
     <article class="message is-info">
       <div class="message-body has-text-light">
@@ -135,7 +136,7 @@
 
       <tbody id="content-1" class="content" style="display: contents;">
         <tr>
-          <td><a class="bookmarklet" href="javascript:var info = Game.view.gachaModel.attributes;var tickets = info.legend.lineup[1].legend_gacha_ticket_list.map(t => t.ticket_num).reduce((a, b) => a + b);var tenParts = info.legend.lineup[0].legend_gacha_ticket_list[0].ticket_num;var crystals = info.stone_num;navigator.clipboard.writeText(`/spark set sh: ${crystals} ${tickets} ${tenParts}`);alert('Spark command copied!');">Copy my /spark</a></td>
+          <td><a class="bookmarklet" href="javascript:var info = Game.view.gachaModel.attributes;var tickets = info.legend.lineup.find(b => b.name === 'Premium Draw').legend_gacha_ticket_list.map(t => t.ticket_num).reduce((a, b) => a + b);var tenParts = info.legend.lineup.find(b => b.name === 'Premium 10-Part Draw').legend_gacha_ticket_list[0].ticket_num;var crystals = info.stone_num;navigator.clipboard.writeText(`/spark set sh: ${crystals} ${tickets} ${tenParts}`);alert('Spark command copied!');">Copy my /spark</a></td>
           <td>
             <ul>
               <li>Copies a filled out <strong>/spark set</strong> command for Europa bot</li>
@@ -146,7 +147,7 @@
           </td>
         </tr>
         <tr>
-          <td><a class="bookmarklet" href="javascript:var info = Game.view.gachaModel.attributes;var allTickets = info.legend.lineup[1].legend_gacha_ticket_list;var tenParts = info.legend.lineup[0].legend_gacha_ticket_list[0].ticket_num;var crystals = parseInt(info.stone_num);var singles = allTickets.map(t => t.ticket_num).reduce((a, b) => a + b);var expire = new Date(new Date().setUTCHours(new Date().getUTCHours() > 19 ? 43 : 19, 59)).toLocaleDateString('en-US', {month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', timeZoneName: 'short'});var freeRolls = info.enable_term_free_legend_10 ? 10 : info.enable_term_free_legend ? 1 : 0;var rolls = (tenParts * 10) + singles + (crystals / 300) + freeRolls;var message = `You currently have -- ${Math.floor(rolls)} -- rolls.\nThat's ${(rolls/3).toFixed(2)}% of a spark!\n\n-- Resource Breakdown --`;if (freeRolls) message += `\n> Free Daily Pulls: ${freeRolls} (Expires: ${expire})`;message += `\n> 10 Part Draws: ${tenParts}`;allTickets.forEach(t => message += `\n>${t.ticket_name}: ${t.ticket_num} ${t.ticket_end_at ? `(Expires: ${t.ticket_end_at})` : ''}`);message += `\n> Crystals: ${crystals.toLocaleString()} (${Math.floor(crystals/300)} Draws)`;alert(message);">Spark Tracker</a></td>
+          <td><a class="bookmarklet" href="javascript:var info = Game.view.gachaModel.attributes;var allTickets = info.legend.lineup.find(b => b.name === 'Premium Draw').legend_gacha_ticket_list;var tenParts = info.legend.lineup.find(b => b.name === 'Premium 10-Part Draw').legend_gacha_ticket_list[0].ticket_num;var crystals = parseInt(info.stone_num);var singles = allTickets.map(t => t.ticket_num).reduce((a, b) => a + b);var expire = new Date(new Date().setUTCHours(new Date().getUTCHours() > 19 ? 43 : 19, 59)).toLocaleDateString('en-US', {month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', timeZoneName: 'short'});var freeRolls = info.enable_term_free_legend_10 ? 10 : info.enable_term_free_legend ? 1 : 0;var rolls = (tenParts * 10) + singles + (crystals / 300) + freeRolls;var message = `You currently have -- ${Math.floor(rolls)} -- rolls.\nThat's ${(rolls/3).toFixed(2)}% of a spark!\n\n-- Resource Breakdown --`;if (freeRolls) message += `\n> Free Daily Pulls: ${freeRolls} (Expires: ${expire})`;message += `\n> 10 Part Draws: ${tenParts}`;allTickets.forEach(t => message += `\n>${t.ticket_name}: ${t.ticket_num} ${t.ticket_end_at ? `(Expires: ${t.ticket_end_at})` : ''}`);message += `\n> Crystals: ${crystals.toLocaleString()} (${Math.floor(crystals/300)} Draws)`;alert(message);">Spark Tracker</a></td>
           <td>
             <ul>
               <li>Shows you your spark progress in a pop-up box</li>
