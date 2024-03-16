@@ -161,7 +161,7 @@
           </td>
         </tr>
         <tr>
-          <td><a class="bookmarklet" href="javascript: var bossData = stage.gGameStatus.boss.param[0]; var raidData = stage.pJsnData; navigator.clipboard.writeText(`/raidcode code: ${raidData.twitter.battle_id} name: ${raidData.twitter.monster} time: ${Math.floor(raidData.timer / 60)} hp-percent: ${Math.ceil((bossData.hp / bossData.hpmax) * 100)} hp: ${bossData.hp} participants: ${raidData.fellow}/${raidData.limit_number} quest-id: ${raidData.quest_id}`); alert(`Raid Code Command copied!\nRaid Code: ${raidData.twitter.battle_id}\nBoss HP: ${parseInt(bossData.hp).toLocaleString()} [${(bossData.hp / bossData.hpmax).toLocaleString('en', {style: 'percent'})}]`);">Copy my /raidcode</a></td>
+          <td><a class="bookmarklet" href="javascript:var bossData = stage.gGameStatus.boss.param[0];var raidData = stage.pJsnData;navigator.clipboard.writeText(`/raidcode code: ${raidData.twitter.battle_id} name: ${raidData.twitter.monster} time: ${Math.floor(raidData.timer / 60)} hp-percent: ${((bossData.hp / bossData.hpmax) * 100).toFixed(2)} hp: ${bossData.hp} participants: ${raidData.fellow}/${raidData.limit_number} quest-id: ${raidData.quest_id}`); alert(`Raid Code Command copied!\nRaid Code: ${raidData.twitter.battle_id}\nBoss HP: ${parseInt(bossData.hp).toLocaleString()} [${((bossData.hp / bossData.hpmax) * 100).toFixed(2)}%]`);">Copy my /raidcode</a></td>
           <td>
             <ul>
               <li>
