@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en-us" class="has-background-dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Peer Review File Link Fetcher</title>
+  <link rel="icon" type="image/x-icon" href="https://www.instructure.com/sites/default/files/image/2021-12/Canvas_logo_single_mark.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <script>
+    function getLink(){
+      const input = document.getElementById("link").value;
+      const assignmentLink = input.match(/.+?assignments\/.+(?=\?)/)
+      const code = input.match(/(?<=\=).+/)
+      document.getElementById("result").innerHTML = `${assignmentLink}/anonymous_submissions/${code}`
+      document.getElementById("result").href = `${assignmentLink}/anonymous_submissions/${code}`
+    }
+  </script>
+  <style>
+    a, a:hover {
+      color: #009ff6 !important;
+    }
+
+    .message-body {
+      background-color: #525252;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container" style="margin-top: 1em;">
+    <h1 class="title is-2 has-text-light">Peer Review File Link Fetcher</h1>
+
+    <article class="message is-info">
+      <div class="message-body has-text-light">
+        This tool fetches the link to the file(s) for peer reviews on Canvas, useful when Canvas's preview tool isn't able to load the file.
+        <p style="height: 10px;"></p>
+        The peer review link should take the form of: <strong>https://your_school.instructure.com/courses/11111/assignments/2222222?anonymous_asset_id=33333</strong>
+        <p style="height: 10px;"></p>
+        The numbers in your link will be different, but make sure that your link has the same structure. 11111 is the course code, 2222222 is the assignment code, and 33333 is a user code or a submission code.
+      </div>
+    </article>
+
+    <div class="field is-grouped" style="margin-top: 1rem;">
+      <p class="control is-expanded">
+        <input id="link" class="input" type="text" placeholder="Peer Review Link">
+      </p>
+      <button class="button is-info" onclick="getLink()">Get Link</button>
+    </div>
+
+    <article class="message">
+      <div class="message-header">
+        <p>Here is your link:</p>
+      </div>
+      <div class="message-body">
+        <a id="result" href="" target="_blank"></a>
+      </div>
+    </article>
+</body>
+</html>
