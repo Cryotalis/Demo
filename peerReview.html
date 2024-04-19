@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
   <script>
     function getLink(){
-      const input = document.getElementById("link").value;
+      const input = document.getElementById("link").value
       const assignmentLink = input.match(/.+?assignments\/.+(?=\?)/)
       const code = input.match(/(?<=\=).+/)
       document.getElementById("result").innerHTML = `${assignmentLink}/anonymous_submissions/${code}`
