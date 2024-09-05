@@ -526,7 +526,8 @@ function downloadFile(url, name) {
 }
 
 function downloadFiles(files, folderName) {
-    if (!fs.existsSync(path.join(__dirname, folderName))) fs.mkdirSync(path.join(__dirname, folderName))
+    const folderPath = path.join(__dirname, folderName)
+    if (!fs.existsSync(folderPath)) fs.mkdirSync(folderPath)
 
     for (let file of files) {
         downloadFile(file.link, `${folderName}/${file.name}`)
