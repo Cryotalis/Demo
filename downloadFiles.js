@@ -2,6 +2,14 @@ const http = require('https'); // or 'https' for https:// URLs
 const fs = require('fs');
 const path = require('path')
 
+{ // For scraping emote names and links from discord (must be used at the Emoji tab of Server Settings)
+    var emoteInfo = document.body.innerHTML.match(/(?<=url\(&quot;)https:\/\/cdn.discordapp.com\/emojis.+?(?=\?).+?value=".+?"/g)
+    var emotes = emoteInfo.map(i => ({
+        name: i.match(/(?<=value=").+(?=")/)[0],
+        link: i.match(/.+?(?=\?)/)[0].replace("webp", "png"),
+    }))
+}
+
 const emotes = [
     {
         "name": "Steam_Standard",
