@@ -513,19 +513,6 @@ const emotes = [
     }
 ]
 
-function downloadFile(url, name, folderName) {
-    if (!fs.existsSync(path.join(__dirname, folderName))) fs.mkdirSync(path.join(__dirname, folderName))
-    
-    const file = fs.createWriteStream(`${folderName}/${name}${url.match(/.+(\..+)$/m)[1]}`)
-    
-    http.get(url, response => {
-        response.pipe(file);
-
-        // after download completed close filestream
-        file.on("finish", () => file.close())
-    })
-}
-
 function downloadFile(url, name) {
     const extension = url.match(/.+(\..+)$/m)[1]
     const file = fs.createWriteStream(`${name}${extension}`)
