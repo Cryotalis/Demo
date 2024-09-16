@@ -1,7 +1,2 @@
 node_modules
-test.js
-test1.js
-test.md
-test.cs
-test.json
-test.html
+*test*
